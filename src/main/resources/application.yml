@@ -23,7 +23,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,prometheus
   endpoint:
     health:
       show-details: always
@@ -33,3 +33,6 @@ management:
       group:
         readiness:
           include: readinessState,rabbit
+  metrics:
+    tags:
+      application: ${spring.application.name}
