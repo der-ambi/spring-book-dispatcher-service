@@ -31,8 +31,9 @@ spec:
           env:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
-            - name: SPRING_RABBITMQ_HOST
-              value: "polar-rabbitmq"
+          volumeMounts:
+            - name: dispatcher-config-volume
+              mountPath: /workspace/config
           livenessProbe:
             httpGet:
               port: 9003
@@ -45,3 +46,7 @@ spec:
               path: /actuator/health/readiness
             initialDelaySeconds: 5
             periodSeconds: 15
+      volumes:
+        - name: dispatcher-config-volume
+          configMap:
+            name: dispatcher-config
